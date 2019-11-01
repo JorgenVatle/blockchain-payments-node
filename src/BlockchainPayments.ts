@@ -91,16 +91,13 @@ export default class BlockchainPayments {
 
         this.api.get('/balance_update', {
             data: this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
-                addr,
-                callback,
-                op,
-                confs,
+                addr, callback, op, confs,
                 // @ts-ignore
-                onNotification
-            })
+                onNotification,
+            }),
         }).then((response: AxiosResponse<BlockchainApi.BalanceUpdates.Response>) => {
             return response.data;
-        })
+        });
     }
 
 }
