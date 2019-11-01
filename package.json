@@ -23,5 +23,8 @@
   "homepage": "https://github.com/JorgenVatle/blockchain-payments-node#readme",
   "devDependencies": {
     "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "axios": "^0.19.0"
   }
 }
