@@ -49,7 +49,7 @@ Blockchain.watchAddress({
     webhookUrl: 'https://example.com/ipn/btc', // URL to receive payment notification requests on.
 
     // Optional parameters:
-    confirmations: 1,       // Number of confirmations to wait for before hitting the specified webhook URL. (default: 1)
+    confirmations: 1,       // Number of confirmations to wait for before a notification is sent to your webhook URL. (default: 1)
     onNotification: 'KEEP', // (DELETE, KEEP) Whether to keep sending webhooks to the specified URL once requested confirmations has been reached. (Default: 'Keep')
     type: 'ALL'             // (ALL, RECEIVE, SPEND) The type of action to receive notifications for. (default: 'ALL') Useful if you only want to track incoming payments.
 })
