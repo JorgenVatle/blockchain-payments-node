@@ -78,7 +78,7 @@ export default class BlockchainPayments {
     /**
      * Monitor any Bitcoin address for incoming payments.
      */
-    monitorAddress(options: Method.Options.monitorAddress) {
+    public monitorAddress(options: Method.Options.monitorAddress) {
         const defaults: Partial<Method.Options.monitorAddress> = {
             onNotification: 'KEEP',
             confs: 1,
