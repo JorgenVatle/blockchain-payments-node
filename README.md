@@ -1,7 +1,7 @@
 # Blockchain Payments API for Node.js
 A simple wrapper over [Blockchain.com](https://www.blockchain.com/)'s 
-[Payments API](https://www.blockchain.com/api/api_receive). Create and receive addresses and payment notification 
-webhooks.
+[Payments API](https://www.blockchain.com/api/api_receive).
+Create and receive Bitcoin addresses and payment notification webhooks in seconds!
 
 ## Installation
 ```bash
