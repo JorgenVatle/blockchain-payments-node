@@ -64,7 +64,7 @@ export default class BlockchainPayments {
     /**
      * Create a payment address.
      */
-    public createPayment(options: Method.Options.createPayment) {
+    public createAddress(options: Method.Options.createPayment) {
         return this.api.get('/', {
             data: this.buildQuery<BlockchainApi.GenerateAddress.Request>({
                 xpub: this.xpub,
