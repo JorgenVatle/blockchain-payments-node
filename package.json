@@ -1,0 +1,24 @@
+{
+  "name": "blockchain-payments-node",
+  "version": "1.0.0",
+  "description": "Blockahain.info Payments wrapper for Node.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JorgenVatle/blockchain-payments-node.git"
+  },
+  "keywords": [
+    "blockchain.info",
+    "bitcoin",
+    "payments"
+  ],
+  "author": "Jørgen <Jorgen@WcAServices.net> (https://github.com/JorgenVatle)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JorgenVatle/blockchain-payments-node/issues"
+  },
+  "homepage": "https://github.com/JorgenVatle/blockchain-payments-node#readme"
+}
