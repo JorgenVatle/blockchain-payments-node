@@ -40,9 +40,9 @@ Blockchain.createAddress({
 })
 ```
 
-### Watch any Bitcoin address for incoming/outgoing payments
+### Watch any Bitcoin address for payments
 Blockchain's API isn't limited to just watching addresses _you've_ created. You can watch any Bitcoin address for
-incoming and outgoing payments. (or both!)
+incoming and/or outgoing payments.
 ```typescript
 Blockchain.watchAddress({
     address: '3HoDXkm5iY...',                  // Bitcoin address to watch.
