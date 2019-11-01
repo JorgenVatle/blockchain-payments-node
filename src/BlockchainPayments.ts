@@ -64,7 +64,7 @@ export default class BlockchainPayments {
     /**
      * Create a payment address.
      */
-    public createPayment(options: CreatePaymentOptions) {
+    public createPayment(options: Method.Options.createPayment) {
         return this.api.get('/', {
             data: this.buildQuery({
                 xpub: this.xpub,
@@ -75,15 +75,74 @@ export default class BlockchainPayments {
         });
     }
 
-}
-
-interface CreatePaymentOptions {
     /**
-     * URL to receive notifications whenever you receive a payment to the returned address.
+     * Monitor any Bitcoin address for incoming payments.
      */
-    webhookUrl: string;
+    monitorAddress(options: Method.Options.monitorAddress) {
+        const { address: addr, webhookUrl: callback, type: op, confs, onNotification } = options;
+
+        this.api.get('/balance_update', {
+            data: this.buildQuery({
+                addr, callback, op, confs, onNotification
+            })
+        }).then((response: AxiosResponse<BlockchainApi.BalanceUpdates.Response>) => {
+            return response.data;
+        })
+    }
+
 }
 
+/**
+ * Options and responses for BlockchainPayments methods.
+ */
+declare namespace Method {
+    namespace Options {
+
+        interface createPayment {
+            /**
+             * URL to receive notifications whenever you receive a payment to the returned address.
+             */
+            webhookUrl: string;
+        }
+
+        interface monitorAddress {
+            /**
+             * Bitcoin address to monitor.
+             */
+            address: BlockchainApi.BalanceUpdates.Request['addr'];
+
+            /**
+             * URL to receive notifications on whenever you receive a payment for the submitted address.
+             */
+            webhookUrl: BlockchainApi.BalanceUpdates.Request['callback'];
+
+            /**
+             * Request notification behaviour.
+             * Likely whether to keep or end notifying the provided callback URL once the transaction reaches the
+             * specified number of confirmations.
+             */
+            onNotification?: BlockchainApi.BalanceUpdates.Request['onNotification'];
+
+            /**
+             * Number of confirmations to wait for before sending a notification to your callback URL.
+             * (Default: 3)
+             */
+            confs?: BlockchainApi.BalanceUpdates.Request['confs'];
+
+            /**
+             * Address operation (send/receive) you would like to receive notifications for.
+             * (Default: 'ALL')
+             */
+            type?: BlockchainApi.BalanceUpdates.Request['op'];
+
+        }
+
+    }
+}
+
+/**
+ * BlockchainPayments constructor options.
+ */
 interface ConstructorOptions {
     xpub: string;
     apiKey: string;
