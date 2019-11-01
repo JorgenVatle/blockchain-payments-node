@@ -2,7 +2,7 @@
   "name": "blockchain-payments-node",
   "version": "1.0.0",
   "description": "Blockahain.info Payments wrapper for Node.js",
-  "main": "dist/index.js",
+  "main": "dist/BlockchainPayments.js",
   "types": "dist/BlockchainPayments.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
