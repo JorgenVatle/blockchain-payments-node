@@ -31,7 +31,7 @@ export default class BlockchainPayments {
     /**
      * Blockchain Payments constructor
      */
-    constructor({ apiKey, xpub, webhookSecret }: ConstructorOptions) {
+    public constructor({ apiKey, xpub, webhookSecret }: ConstructorOptions) {
         this.apiKey = apiKey;
         this.xpub = xpub;
         this.webhookSecret = webhookSecret;
