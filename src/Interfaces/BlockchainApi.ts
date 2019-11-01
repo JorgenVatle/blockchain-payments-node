@@ -1,6 +1,6 @@
 export namespace BlockchainApi {
-    namespace GenerateAddress {
-        interface Response {
+    export namespace GenerateAddress {
+        export interface Response {
 
             /**
              * Bitcoin receiving address.
