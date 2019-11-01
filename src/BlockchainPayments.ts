@@ -81,10 +81,10 @@ export default class BlockchainPayments {
     public watchAddress(options: Method.Options.monitorAddress) {
         const defaults: Partial<Method.Options.monitorAddress> = {
             onNotification: 'KEEP',
-            confs: 1,
+            confirmations: 1,
             type: 'ALL',
         };
-        const { address: addr, webhookUrl: callback, type: op, confs, onNotification } = {
+        const { address: addr, webhookUrl: callback, type: op, confirmations: confs, onNotification } = {
             ...defaults,
             ...options,
         };
@@ -137,7 +137,7 @@ declare namespace Method {
              * Number of confirmations to wait for before sending a notification to your callback URL.
              * (Default: 3)
              */
-            confs?: BlockchainApi.BalanceUpdates.Request['confs'];
+            confirmations?: BlockchainApi.BalanceUpdates.Request['confs'];
 
             /**
              * Address operation (send/receive) you would like to receive notifications for.
