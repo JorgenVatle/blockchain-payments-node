@@ -1,6 +1,7 @@
 import QueryString from 'qs';
-import Axios, { AxiosInstance } from 'axios';
+import Axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { KeyValue } from './Interfaces/TypeScriptUtility';
+import { BlockchainApi } from './Interfaces/BlockchainApi';
 
 /**
  * Blockchain.info Payments API (V2)
@@ -57,6 +58,17 @@ export default class BlockchainPayments {
         return QueryString.stringify({
             key: this.apiKey,
             ...data,
+        });
+    }
+
+    /**
+     * Create a payment address.
+     */
+    public createPayment() {
+        return this.api.get('/', {
+            data: this.buildQuery({ xpub: this.xpub }),
+        }).then(({ data }: AxiosResponse<BlockchainApi.GenerateAddress.Response>) => {
+            return data;
         });
     }
 
