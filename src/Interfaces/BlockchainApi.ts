@@ -42,6 +42,9 @@ export declare namespace BlockchainApi {
     }
 
     namespace BalanceUpdates {
+        type Operation = 'RECEIVE' | 'SPEND';
+        type NotificationAction = 'KEEP' | 'DELETE';
+
         interface Request extends ApiRequest {
 
             /**
@@ -59,7 +62,7 @@ export declare namespace BlockchainApi {
              * Likely whether to keep or end notifying the provided callback URL once the transaction reaches the
              * specified number of confirmations.
              */
-            onNotification: 'KEEP' | 'DELETE';
+            onNotification: NotificationAction;
 
             /**
              * Number of confirmations to wait for before sending a notification to your callback URL.
@@ -68,10 +71,46 @@ export declare namespace BlockchainApi {
             confs: number;
 
             /**
-             * Address operation you would like to receive notifications for.
+             * Address operation (send/receive) you would like to receive notifications for.
              * (Default: 'ALL')
              */
-            op: 'ALL' | 'RECEIVE' | 'SPEND'
+            op: Operation | 'ALL';
+
+        }
+
+        interface Response {
+
+            /**
+             * Notification ID
+             */
+            id: number;
+
+            /**
+             * The Bitcoin address you're watching.
+             */
+            addr: string;
+
+            /**
+             * Address operation. (send/receive)
+             */
+            op: Operation;
+
+            /**
+             * Number of confirmations a transaction needs before a notification is sent to your callback URL.
+             */
+            confs: number;
+
+            /**
+             * The URL you are receiving notifications on.
+             */
+            callback: string;
+
+            /**
+             * Request notification behaviour.
+             * Likely whether to keep or end notifying the provided callback URL once the transaction reaches the
+             * specified number of confirmations.
+             */
+            onNotification: NotificationAction;
 
         }
     }
