@@ -3,6 +3,10 @@ A simple wrapper over [Blockchain.com](https://www.blockchain.com/)'s
 [Payments API](https://www.blockchain.com/api/api_receive).
 Create and receive Bitcoin addresses and payment notification webhooks in seconds!
 
+[![Downloads](https://img.shields.io/npm/dt/blockchain-payments-node.svg)](https://www.npmjs.com/package/blockchain-payments-node)
+[![Version](https://img.shields.io/npm/v/blockchain-payments-node.svg)](https://www.npmjs.com/package/blockchain-payments-node)
+[![Node Version](https://img.shields.io/node/v/blockchain-payments-node.svg)](https://www.npmjs.com/package/blockchain-payments-node)
+
 ## Installation
 ```bash
 npm install blockchain-payments-node
