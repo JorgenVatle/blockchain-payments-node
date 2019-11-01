@@ -68,13 +68,13 @@ export declare namespace BlockchainApi {
              * Number of confirmations to wait for before sending a notification to your callback URL.
              * (Default: 3)
              */
-            confs: number;
+            confs?: number;
 
             /**
              * Address operation (send/receive) you would like to receive notifications for.
              * (Default: 'ALL')
              */
-            op: Operation | 'ALL';
+            op?: Operation | 'ALL';
 
         }
 
