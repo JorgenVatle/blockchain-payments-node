@@ -32,6 +32,8 @@ const Blockchain = new BlockchainPayments({
 ```
 
 ### Create payment address
+Simply supply a webhook URI to be notified on. Once a payment is received for the address you receive, you'll promptly
+receive an HTTP request on the specified URL.
 ```typescript
 Blockchain.createAddress({
     webhookUrl: 'https://example.com/ipn/btc' // URL to receive payment notification requests on.
@@ -39,6 +41,8 @@ Blockchain.createAddress({
 ```
 
 ### Watch any Bitcoin address for incoming/outgoing payments
+Blockchain's API isn't limited to just watching addresses _you've_ created. You can watch any Bitcoin address for
+incoming and outgoing payments. (or both!)
 ```typescript
 Blockchain.watchAddress({
     address: '3HoDXkm5iY...',                  // Bitcoin address to watch.
