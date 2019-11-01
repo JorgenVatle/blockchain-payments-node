@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/JorgenVatle/blockchain-payments-node/issues"
   },
-  "homepage": "https://github.com/JorgenVatle/blockchain-payments-node#readme"
+  "homepage": "https://github.com/JorgenVatle/blockchain-payments-node#readme",
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  }
 }
