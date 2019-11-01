@@ -64,14 +64,24 @@ export default class BlockchainPayments {
     /**
      * Create a payment address.
      */
-    public createPayment() {
+    public createPayment(options: CreatePaymentOptions) {
         return this.api.get('/', {
-            data: this.buildQuery({ xpub: this.xpub }),
+            data: this.buildQuery({
+                xpub: this.xpub,
+                callback: options.webhookUrl,
+            }),
         }).then(({ data }: AxiosResponse<BlockchainApi.GenerateAddress.Response>) => {
             return data;
         });
     }
 
+}
+
+interface CreatePaymentOptions {
+    /**
+     * URL to receive notifications whenever you receive a payment to the returned address.
+     */
+    webhookUrl: string;
 }
 
 interface ConstructorOptions {
