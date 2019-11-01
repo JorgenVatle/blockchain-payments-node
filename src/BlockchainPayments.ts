@@ -54,7 +54,7 @@ export default class BlockchainPayments {
     /**
      * Prepare querystring, including the API key using the given data.
      */
-    private buildQuery(data: KeyValue<string>) {
+    private buildQuery<T = KeyValue<string>>(data: Omit<T, 'key'>) {
         return QueryString.stringify({
             key: this.apiKey,
             ...data,
@@ -66,7 +66,7 @@ export default class BlockchainPayments {
      */
     public createPayment(options: Method.Options.createPayment) {
         return this.api.get('/', {
-            data: this.buildQuery({
+            data: this.buildQuery<BlockchainApi.GenerateAddress.Request>({
                 xpub: this.xpub,
                 callback: options.webhookUrl,
             }),
@@ -79,11 +79,24 @@ export default class BlockchainPayments {
      * Monitor any Bitcoin address for incoming payments.
      */
     monitorAddress(options: Method.Options.monitorAddress) {
-        const { address: addr, webhookUrl: callback, type: op, confs, onNotification } = options;
+        const defaults: Partial<Method.Options.monitorAddress> = {
+            onNotification: 'KEEP',
+            confs: 1,
+            type: 'ALL',
+        };
+        const { address: addr, webhookUrl: callback, type: op, confs, onNotification } = {
+            ...defaults,
+            ...options,
+        };
 
         this.api.get('/balance_update', {
-            data: this.buildQuery({
-                addr, callback, op, confs, onNotification
+            data: this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
+                addr,
+                callback,
+                op,
+                confs,
+                // @ts-ignore
+                onNotification
             })
         }).then((response: AxiosResponse<BlockchainApi.BalanceUpdates.Response>) => {
             return response.data;
