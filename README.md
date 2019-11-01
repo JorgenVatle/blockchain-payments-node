@@ -25,9 +25,9 @@ New up an instance of the Blockchain API wrapper.
 import BlockchainPayments from 'blockchain-payments-node';
 
 const Blockchain = new BlockchainPayments({
-    xpub: 'Your Bitcoin wallet\'s xPub key.', // See above for instructions on creating one.
-    apiKey: 'Your Blockchain.com API key',
-    webhookSecret: 'A secret code of your choice to validate incoming webhooks',
+    xpub: 'xpub6DQC9f...',        // See above for instructions on creating one
+    apiKey: '5b1ae17...',         // Your blockchain.com API key
+    webhookSecret: 'supersecret', // A secret code of your choice to validate incoming webhooks
 })
 ```
 
@@ -41,13 +41,13 @@ Blockchain.createAddress({
 ### Watch any Bitcoin address for incoming/outgoing payments
 ```typescript
 Blockchain.watchAddress({
-    address: '3HoDXkm5iY...', // Bitcoin address to watch.
+    address: '3HoDXkm5iY...',                  // Bitcoin address to watch.
     webhookUrl: 'https://example.com/ipn/btc', // URL to receive payment notification requests on.
 
     // Optional parameters:
-    confirmations: 1, // Number of confirmations to wait for before hitting the specified webhook URL. (default: 1)
+    confirmations: 1,       // Number of confirmations to wait for before hitting the specified webhook URL. (default: 1)
     onNotification: 'KEEP', // (DELETE, KEEP) Whether to keep sending webhooks to the specified URL once requested confirmations has been reached. (Default: 'Keep')
-    type: 'ALL' // (ALL, RECEIVE, SPEND) The type of action to receive notifications for. (default: 'ALL') Useful if you only want to track incoming payments.
+    type: 'ALL'             // (ALL, RECEIVE, SPEND) The type of action to receive notifications for. (default: 'ALL') Useful if you only want to track incoming payments.
 })
 ```
 
