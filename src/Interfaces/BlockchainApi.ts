@@ -1,5 +1,24 @@
 export declare namespace BlockchainApi {
     namespace GenerateAddress {
+        interface Request {
+
+            /**
+             * Your HD wallet xPub.
+             */
+            xpub: string;
+
+            /**
+             * Callback URL to receive payment updates on.
+             */
+            callback: string;
+
+            /**
+             * Your Blockchain.info API key.
+             */
+            key: string;
+
+        }
+
         interface Response {
 
             /**
