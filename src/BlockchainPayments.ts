@@ -3,6 +3,8 @@
  *
  * @link https://www.blockchain.com/api/api_receive
  */
+import Axios, { AxiosInstance } from 'axios';
+
 export default class BlockchainPayments {
 
     /**
@@ -29,12 +31,21 @@ export default class BlockchainPayments {
     private apiKey: string;
 
     /**
+     * Blockchain.info Payments API client.
+     */
+    private api: AxiosInstance;
+
+    /**
      * Blockchain Payments constructor
      */
     public constructor({ apiKey, xpub, webhookSecret }: ConstructorOptions) {
         this.apiKey = apiKey;
         this.xpub = xpub;
         this.webhookSecret = webhookSecret;
+
+        this.api = Axios.create({
+            baseURL: 'https://api.blockchain.info/v2/receive/',
+        });
     }
 
 }
