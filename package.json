@@ -10,6 +10,9 @@
     "postpublish": "git push && git push --tags",
     "prepare": "npm run build"
   },
+  "engines": {
+    "node": ">=6.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JorgenVatle/blockchain-payments-node.git"
