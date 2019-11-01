@@ -1,10 +1,12 @@
+import QueryString from 'qs';
+import Axios, { AxiosInstance } from 'axios';
+import { KeyValue } from './Interfaces/TypeScriptUtility';
+
 /**
  * Blockchain.info Payments API (V2)
  *
  * @link https://www.blockchain.com/api/api_receive
  */
-import Axios, { AxiosInstance } from 'axios';
-
 export default class BlockchainPayments {
 
     /**
@@ -45,6 +47,16 @@ export default class BlockchainPayments {
 
         this.api = Axios.create({
             baseURL: 'https://api.blockchain.info/v2/receive/',
+        });
+    }
+
+    /**
+     * Prepare querystring, including the API key using the given data.
+     */
+    private buildQuery(data: KeyValue<string>) {
+        return QueryString.stringify({
+            key: this.apiKey,
+            ...data,
         });
     }
 
