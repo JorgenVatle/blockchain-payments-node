@@ -55,6 +55,12 @@ Blockchain.watchAddress({
 })
 ```
 
+## Notes
+While this wrapper takes care of most for you, it is still encouraged that you go over the API docs as there are some
+caveats with address generation. Particularly in instances where one creates more than 20 unused addresses - this will
+result in an error until one of the 20 addresses receive at least one transaction.
+- [Payments API Documentation](https://www.blockchain.com/api/api_receive)
+
 ## License
 This repository is licensed under the ISC license.
 
