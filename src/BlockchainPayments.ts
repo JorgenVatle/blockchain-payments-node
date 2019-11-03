@@ -16,7 +16,7 @@ export default class BlockchainPayments {
      * @note You decide the value of this.
      * @link https://www.blockchain.com/api/api_receive
      */
-    private webhookSecret?: string;
+    private readonly webhookSecret?: string;
 
     /**
      * Bitcoin BIP 32 wallet xPub
@@ -24,14 +24,14 @@ export default class BlockchainPayments {
      * @link https://api.blockchain.info/v2/apikey/request/
      * @link https://blog.blockonomics.co/how-to-find-your-xpub-key-with-these-8-popular-bitcoin-wallets-ce8ea665ffdc
      */
-    private xpub: string;
+    private readonly xpub: string;
 
     /**
      * Blockchain.info API Key
      *
      * @link https://api.blockchain.info/v2/apikey/request/
      */
-    private apiKey: string;
+    private readonly apiKey: string;
 
     /**
      * Blockchain.info Payments API client.
