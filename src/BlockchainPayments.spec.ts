@@ -3,7 +3,7 @@ import Config from 'config';
 
 describe('BlockchainPayments', () => {
     const Blockchain = new BlockchainPayments(Config.get('blockchain'));
-    const webhookUrl = 'http://example.com';
+    const webhookUrl = 'https://example.com?invoice_id=058921123';
 
     test('Can create payment addresses', async () => {
         const request = await Blockchain.createAddress({ webhookUrl });
