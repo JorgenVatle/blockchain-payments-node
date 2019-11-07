@@ -63,7 +63,7 @@ export default class BlockchainPayments {
             data = error.response.data;
         }
 
-        return new BlockchainPaymentsError(error.message, data);
+        throw new BlockchainPaymentsError(error.message, data);
     }
 
     /**
