@@ -48,7 +48,7 @@ export default class BlockchainPayments {
         this.webhookSecret = webhookSecret;
 
         this.api = Axios.create({
-            baseURL: 'https://api.blockchain.info/v2/receive/',
+            baseURL: 'https://api.blockchain.info/v2/receive',
         });
         this.api.interceptors.response.use(undefined, this.handleException);
     }
@@ -80,7 +80,7 @@ export default class BlockchainPayments {
      * Create a payment address.
      */
     public createAddress(options: Method.Options.createPayment) {
-        return this.api.get('/', {
+        return this.api.get('', {
             params: this.buildQuery<BlockchainApi.GenerateAddress.Request>({
                 xpub: this.xpub,
                 callback: options.webhookUrl,
