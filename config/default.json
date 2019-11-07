@@ -1,0 +1,7 @@
+{
+  "blockchain": {
+    "xpub": "Wallet xPub for testing",
+    "webhookSecret": "Webhook secret for testing",
+    "apiKey": "Valid Blockchain.com secret, for testing."
+  }
+}
