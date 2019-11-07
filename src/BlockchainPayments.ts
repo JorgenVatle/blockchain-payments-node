@@ -1,7 +1,8 @@
 import QueryString from 'qs';
-import Axios, { AxiosInstance, AxiosResponse } from 'axios';
+import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { KeyValue } from './Interfaces/TypeScriptUtility';
 import { BlockchainApi } from './Interfaces/BlockchainApi';
+import { BlockchainPaymentsError } from './BlockchainPaymentsError';
 
 /**
  * Blockchain.info Payments API (V2)
@@ -52,6 +53,19 @@ export default class BlockchainPayments {
     }
 
     /**
+     * Handle an API request error.
+     */
+    private handleException(error: AxiosError) {
+        let data;
+
+        if (error.response && typeof error.response.data === 'object') {
+            data = error.response.data;
+        }
+
+        return new BlockchainPaymentsError(error.message, data);
+    }
+
+    /**
      * Prepare querystring, including the API key using the given data.
      */
     private buildQuery<T = KeyValue<string>>(data: Omit<T, 'key'>) {
@@ -72,7 +86,7 @@ export default class BlockchainPayments {
             }),
         }).then(({ data }: AxiosResponse<BlockchainApi.GenerateAddress.Response>) => {
             return data;
-        });
+        }).catch(this.handleException);
     }
 
     /**
@@ -97,7 +111,7 @@ export default class BlockchainPayments {
             }),
         }).then((response: AxiosResponse<BlockchainApi.BalanceUpdates.Response>) => {
             return response.data;
-        });
+        }).catch(this.handleException);
     }
 
 }
