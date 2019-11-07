@@ -70,10 +70,10 @@ export default class BlockchainPayments {
      * Prepare querystring, including the API key using the given data.
      */
     private buildQuery<T = KeyValue<string>>(data: Omit<T, 'key'>) {
-        return QueryString.stringify({
+        return {
             key: this.apiKey,
             ...data,
-        });
+        };
     }
 
     /**
@@ -81,7 +81,7 @@ export default class BlockchainPayments {
      */
     public createAddress(options: Method.Options.createPayment) {
         return this.api.get('/', {
-            data: this.buildQuery<BlockchainApi.GenerateAddress.Request>({
+            params: this.buildQuery<BlockchainApi.GenerateAddress.Request>({
                 xpub: this.xpub,
                 callback: options.webhookUrl,
             }),
@@ -105,7 +105,7 @@ export default class BlockchainPayments {
         };
 
         return this.api.get('/balance_update', {
-            data: this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
+            params: this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
                 addr, callback, op, confs,
                 // @ts-ignore
                 onNotification,
