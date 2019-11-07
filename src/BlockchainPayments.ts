@@ -103,7 +103,7 @@ export default class BlockchainPayments {
             ...options,
         };
 
-        this.api.get('/balance_update', {
+        return this.api.get('/balance_update', {
             data: this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
                 addr, callback, op, confs,
                 // @ts-ignore
