@@ -50,6 +50,7 @@ export default class BlockchainPayments {
         this.api = Axios.create({
             baseURL: 'https://api.blockchain.info/v2/receive/',
         });
+        this.api.interceptors.response.use(undefined, this.handleException);
     }
 
     /**
@@ -86,7 +87,7 @@ export default class BlockchainPayments {
             }),
         }).then(({ data }: AxiosResponse<BlockchainApi.GenerateAddress.Response>) => {
             return data;
-        }).catch(this.handleException);
+        });
     }
 
     /**
@@ -111,7 +112,7 @@ export default class BlockchainPayments {
             }),
         }).then((response: AxiosResponse<BlockchainApi.BalanceUpdates.Response>) => {
             return response.data;
-        }).catch(this.handleException);
+        });
     }
 
 }
