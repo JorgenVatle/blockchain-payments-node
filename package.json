@@ -32,7 +32,10 @@
   },
   "homepage": "https://github.com/JorgenVatle/blockchain-payments-node#readme",
   "devDependencies": {
+    "@types/jest": "^24.0.22",
     "@types/qs": "^6.5.3",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.4"
   },
   "dependencies": {
