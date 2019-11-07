@@ -49,6 +49,9 @@ export default class BlockchainPayments {
 
         this.api = Axios.create({
             baseURL: 'https://api.blockchain.info/v2/receive',
+            paramsSerializer(params: KeyValue<string>) {
+                return QueryString.stringify(params);
+            }
         });
         this.api.interceptors.response.use(undefined, this.handleException);
     }
