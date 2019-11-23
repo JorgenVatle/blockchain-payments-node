@@ -26,7 +26,7 @@ export default class BlockchainPayments {
      * @link https://api.blockchain.info/v2/apikey/request/
      * @link https://blog.blockonomics.co/how-to-find-your-xpub-key-with-these-8-popular-bitcoin-wallets-ce8ea665ffdc
      */
-    private readonly xpub: string;
+    private xpub: string;
 
     /**
      * Blockchain.info API Key
@@ -122,6 +122,13 @@ export default class BlockchainPayments {
         }).then((response: AxiosResponse<BlockchainApi.BalanceUpdates.Response>) => {
             return response.data;
         });
+    }
+
+    /**
+     * Update the currently used xPub to the given xPub.
+     */
+    public setXPub(xpub: string) {
+        this.xpub = xpub;
     }
 
 }
