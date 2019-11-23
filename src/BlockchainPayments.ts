@@ -3,6 +3,7 @@ import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { KeyValue } from './Interfaces/TypeScriptUtility';
 import { BlockchainApi } from './Interfaces/BlockchainApi';
 import { BlockchainPaymentsError } from './Errors/BlockchainPaymentsError';
+import BlockchainAddressGapTooLarge from './Errors/BlockchainAddressGapTooLarge';
 
 /**
  * Blockchain.info Payments API (V2)
@@ -61,12 +62,17 @@ export default class BlockchainPayments {
      */
     private handleException(error: AxiosError) {
         let data;
+        let exception = BlockchainPaymentsError;
 
         if (error.response && typeof error.response.data === 'object') {
             data = error.response.data;
         }
 
-        throw new BlockchainPaymentsError(error.message, data);
+        if (data && data.message === 'Problem with xpub') {
+            exception = BlockchainAddressGapTooLarge;
+        }
+
+        throw new exception(error.message, data);
     }
 
     /**
