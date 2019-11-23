@@ -2,7 +2,7 @@ import QueryString from 'qs';
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { KeyValue } from './Interfaces/TypeScriptUtility';
 import { BlockchainApi } from './Interfaces/BlockchainApi';
-import { BlockchainPaymentsError } from './BlockchainPaymentsError';
+import { BlockchainPaymentsError } from './Errors/BlockchainPaymentsError';
 
 /**
  * Blockchain.info Payments API (V2)
