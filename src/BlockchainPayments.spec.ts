@@ -31,7 +31,10 @@ describe('BlockchainPayments', () => {
      */
     afterAll(() => {
         return Promise.all(watchers.map(async (id) => {
-            await Blockchain.stopWatch(id);
+            await Blockchain.stopWatch(id).catch((error) => {
+                console.error(error);
+                throw error;
+            });
         }))
     })
 });
