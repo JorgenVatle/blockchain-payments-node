@@ -78,7 +78,7 @@ export default class BlockchainPayments {
     /**
      * Prepare querystring, including the API key using the given data.
      */
-    private buildQuery<T = KeyValue<string>>(data: Omit<T, 'key'>) {
+    private buildQuery<T = KeyValue<string>>(data?: Omit<T, 'key'>) {
         return {
             key: this.apiKey,
             ...data,
@@ -102,26 +102,40 @@ export default class BlockchainPayments {
     /**
      * Monitor any Bitcoin address for incoming payments.
      */
-    public watchAddress(options: Method.Options.monitorAddress) {
-        const defaults: Partial<Method.Options.monitorAddress> = {
-            onNotification: 'KEEP',
-            confirmations: 1,
-            type: 'ALL',
-        };
-        const { address: addr, webhookUrl: callback, type: op, confirmations: confs, onNotification } = {
-            ...defaults,
-            ...options,
-        };
+    public watchAddress({
+        onNotification = 'KEEP',
+        confirmations = 1,
+        type = 'ALL',
+        address,
+        webhookUrl,
+    }: Method.Options.monitorAddress) {
+        const query = this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
+            addr: address,
+            callback: webhookUrl,
+            op: type,
+            confs: confirmations,
+            onNotification,
+        });
 
-        return this.api.post('/balance_update', {
-            params: this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
-                addr, callback, op, confs,
-                // @ts-ignore
-                onNotification,
-            }),
+        return this.api.post('/balance_update', JSON.stringify(query), {
+            headers: {
+                'Content-Type': 'text/plain',
+            }
         }).then((response: AxiosResponse<BlockchainApi.BalanceUpdates.Response>) => {
             return response.data;
         });
+    }
+
+    /**
+     * Stop address watching for the given watcher ID.
+     * IDs are returned by the watchAddress() method's response body.
+     */
+    stopWatch(id: number) {
+        return this.api.delete(`/balance_update/${id}`, {
+            params: this.buildQuery(),
+        }).then((response: AxiosResponse<BlockchainApi.StopBalanceUpdates.Response>) => {
+            return response.data;
+        })
     }
 
     /**

@@ -59,6 +59,17 @@ Blockchain.watchAddress({
 })
 ```
 
+### Stop watching an address
+Use the ID returned from the `watchAddress()` method to stop watching the address.
+```typescript
+const watcher = await Blockchain.watchAddress({
+    address: '3HoDXkm5iY...',
+    webhookUrl: 'https://example.com/ipn/btc',
+});
+
+await Blockchain.stopWatch(watcher.id); // { deleted: true/false }
+```
+
 ## Notes
 While this wrapper takes care of most for you, it is still encouraged that you go over the API docs as there are some
 caveats with address generation. Particularly in instances where one creates more than 20 unused addresses - this will
