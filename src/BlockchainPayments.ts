@@ -113,12 +113,16 @@ export default class BlockchainPayments {
             ...options,
         };
 
-        return this.api.post('/balance_update', {
-            params: this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
-                addr, callback, op, confs,
-                // @ts-ignore
-                onNotification,
-            }),
+        const query = this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
+            addr, callback, op, confs,
+            // @ts-ignore
+            onNotification,
+        });
+
+        return this.api.post('/balance_update', JSON.stringify(query), {
+            headers: {
+                'Content-Type': 'text/plain',
+            }
         }).then((response: AxiosResponse<BlockchainApi.BalanceUpdates.Response>) => {
             return response.data;
         });
