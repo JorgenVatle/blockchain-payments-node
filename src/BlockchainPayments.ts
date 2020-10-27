@@ -102,20 +102,18 @@ export default class BlockchainPayments {
     /**
      * Monitor any Bitcoin address for incoming payments.
      */
-    public watchAddress(options: Method.Options.monitorAddress) {
-        const defaults: Partial<Method.Options.monitorAddress> = {
-            onNotification: 'KEEP',
-            confirmations: 1,
-            type: 'ALL',
-        };
-        const { address: addr, webhookUrl: callback, type: op, confirmations: confs, onNotification } = {
-            ...defaults,
-            ...options,
-        };
-
+    public watchAddress({
+        onNotification = 'KEEP',
+        confirmations = 1,
+        type = 'ALL',
+        address,
+        webhookUrl,
+    }: Method.Options.monitorAddress) {
         const query = this.buildQuery<BlockchainApi.BalanceUpdates.Request>({
-            addr, callback, op, confs,
-            // @ts-ignore
+            addr: address,
+            callback: webhookUrl,
+            op: type,
+            confs: confirmations,
             onNotification,
         });
 
