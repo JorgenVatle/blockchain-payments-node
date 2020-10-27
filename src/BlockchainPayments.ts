@@ -131,7 +131,7 @@ export default class BlockchainPayments {
      * IDs are returned by the watchAddress() method's response body.
      */
     stopWatch(id: number) {
-        return this.api.delete(`/block_notification/${id}`, {
+        return this.api.delete(`/balance_update/${id}`, {
             params: this.buildQuery(),
         }).then((response: AxiosResponse<BlockchainApi.StopBalanceUpdates.Response>) => {
             return response.data;
