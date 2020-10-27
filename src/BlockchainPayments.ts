@@ -78,7 +78,7 @@ export default class BlockchainPayments {
     /**
      * Prepare querystring, including the API key using the given data.
      */
-    private buildQuery<T = KeyValue<string>>(data: Omit<T, 'key'>) {
+    private buildQuery<T = KeyValue<string>>(data?: Omit<T, 'key'>) {
         return {
             key: this.apiKey,
             ...data,
