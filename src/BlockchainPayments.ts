@@ -127,6 +127,18 @@ export default class BlockchainPayments {
     }
 
     /**
+     * Stop address watching for the given watcher ID.
+     * IDs are returned by the watchAddress() method's response body.
+     */
+    stopWatch(id: number) {
+        return this.api.delete(`/block_notification/${id}`, {
+            params: this.buildQuery(),
+        }).then((response: AxiosResponse<BlockchainApi.StopBalanceUpdates.Response>) => {
+            return response.data;
+        })
+    }
+
+    /**
      * Update the currently used xPub to the given xPub.
      */
     public setXPub(xpub: string) {

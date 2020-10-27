@@ -114,4 +114,23 @@ export declare namespace BlockchainApi {
 
         }
     }
+
+    namespace StopBalanceUpdates {
+        interface Request extends ApiRequest {
+
+            /**
+             * ID returned from BalanceUpdates request.
+             */
+            id: number
+
+        }
+
+        interface Response {
+
+            /**
+             * Whether or not the delete request was successful.
+             */
+            deleted: boolean;
+        }
+    }
 }
